@@ -2,11 +2,12 @@ import yfinance as yf
 import pandas as pd
 from datetime import timedelta, date
 
+# Fetching the date and setting the timeframe.
 today = date.today()
 def days_ago(n):
   return (date.today() - timedelta(n)).strftime('%Y-%m-%d')
 
-ticker = "TSLA"
+ticker = "TSLA" # Feel free to change the ticker to whatever security you want to do analysis on.
 start_date = days_ago(30) # or replace with any number of days you want. Note, Yahoo Finance will 
                           # only work with data in the last sixty days. 
                           
@@ -23,7 +24,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # Convert the DataFrame to a string
 dataF_string = dataF.to_string()
 
-# Create a prompt
+# GPT 3.5 works much better if you give it a persona and specify what it performs well.
 messages = [
     {
         "role": "system",
@@ -39,14 +40,14 @@ messages = [
     }
 ]
 
-# Make the API call
+# The API call
 response = openai.ChatCompletion.create(
-  model="gpt-3.5-turbo", # You can use this engine or another available GPT-3 engine
+  model="gpt-3.5-turbo", 
   messages=messages,
   max_tokens=1000
 )
 
-# The response will include the model's generated text
+# The model's response
 generated_text = response.choices[0].message['content']
 
 print(generated_text)
