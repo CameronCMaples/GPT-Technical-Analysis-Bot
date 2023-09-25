@@ -7,10 +7,9 @@ today = date.today()
 def days_ago(n):
   return (date.today() - timedelta(n)).strftime('%Y-%m-%d')
 
-ticker = "TSLA" # Feel free to change the ticker to whatever security you want to do analysis on.
-start_date = days_ago(30) # or replace with any number of days you want. Note, Yahoo Finance will 
-                          # only work with data in the last sixty days. 
-                          
+ticker = str(input("Please input a ticker: ") # Feel free to change the ticker to whatever security you want to do analysis on.
+start_date = days_ago(60) # or replace with any number of days you want. 
+
 end_date = today.strftime('%Y-%m-%d')
 dataF = yf.download(ticker, start_date, end_date, interval='1d')
 dataF.iloc[:,:]
@@ -28,15 +27,18 @@ dataF_string = dataF.to_string()
 messages = [
     {
         "role": "system",
-        "content": """You are a world class financial analyst. You excel at observing bullish and 
-                    bearish technical analysis trends in past stock data."""
+        "content": """You are a world class financial analyst. You excel at observing bullish and
+                    bearish technical analysis trends in past stock data. Start every conversation by stating the
+                    current price of""" + ticker + """. Please refrain from sharing warnings about investing,
+                    the investor you're talking to is world class and is aware of risks. Refer to the trader as "You".
+                    Please only write decimal points out to the hundreths place."""
     },
     {
         "role": "user",
-        "content": f"""The following stock data for TSLA was retrieved:\n{dataF_string}\nPlease 
-        provide an analysis of the trend and make suggestions on how a trader should position in 
-        the short term to maximize profitability. Point out any bullish or bearish patterns such 
-        as bull flag, bear flag, cup and handle, or other technical analysis patterns."""
+        "content": f"""The following stock data said ticker was retrieved:\n{dataF_string}\n Please 
+        provide an analysis of the trend and make suggestions using specific price points on how a trader 
+        should position in the short term to maximize profitability. Point out any bullish or bearish 
+        patterns such as bull flag, bear flag, cup and handle, or other technical analysis patterns."""
     }
 ]
 
