@@ -7,7 +7,7 @@ today = date.today()
 def days_ago(n):
   return (date.today() - timedelta(n)).strftime('%Y-%m-%d')
 
-ticker = str(input("Please input a ticker: ") # Feel free to change the ticker to whatever security you want to do analysis on.
+ticker = str(input("Please input a ticker: ")) # Feel free to change the ticker to whatever security you want to do analysis on.
 start_date = days_ago(60) # or replace with any number of days you want. 
 
 end_date = today.strftime('%Y-%m-%d')
