@@ -35,7 +35,7 @@ messages = [
     },
     {
         "role": "user",
-        "content": f"""The following stock data said ticker was retrieved:\n{dataF_string}\n Please 
+        "content": f"""The following stock data for said ticker was retrieved:\n{dataF_string}\n Please 
         provide an analysis of the trend and make suggestions using specific price points on how a trader 
         should position in the short term to maximize profitability. Point out any bullish or bearish 
         patterns such as bull flag, bear flag, cup and handle, or other technical analysis patterns."""
